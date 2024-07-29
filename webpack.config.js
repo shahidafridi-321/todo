@@ -1,6 +1,5 @@
 const path  = require('path');
 const HtmlWebpackPlugins = require('html-webpack-plugin');
-const { title } = require('process');
 
 module.exports = {
   mode:'development',
@@ -8,12 +7,17 @@ module.exports = {
   output:{
     filename:'[name].bundle.js',
     path:path.resolve(__dirname,'dist'),
+    clean:true,
   },
   module:{
     rules:[
       {
-        test:'/\.js$/',
+        test:/\.js$/,
       },
+      {
+        test:/\.css$/i,
+        use:['style-loader','css-loader'],
+      }
     ],
   },
 
