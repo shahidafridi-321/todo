@@ -4,7 +4,10 @@
   "description": "a small project for learning purpose and enhancing skills in js using organized and clean code",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build":"webpack",
+    "start": "webpack serve --open --config webpack.config.js"
+
   },
   "keywords": [],
   "author": "",
