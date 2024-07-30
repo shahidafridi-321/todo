@@ -6,6 +6,7 @@
   border: 2px solid #976d6d;
   width: 300px;
   padding: 20px;
+  opacity: 0;
 }
 
 .todo-card {
