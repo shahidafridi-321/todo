@@ -1,6 +1,7 @@
 import './style.css';
 
-function Todo(title, description, dueDate, priority) {
+// This factory creates a todo object
+function CreateTodo(title, description, dueDate, priority) {
   return {
     title,
     description,
@@ -9,7 +10,8 @@ function Todo(title, description, dueDate, priority) {
   }
 }
 
-function Project(name) {
+// This factory creates a project object
+function createProject(name) {
   let todos = [];
   return {
     name,
@@ -17,116 +19,142 @@ function Project(name) {
   }
 }
 
-
+// it creates todo obj and pushes it in the provided project
 function addTodo(project, title, description, duedate, priority) {
-  let todo = Todo(title, description, duedate, priority);
+  let todo = CreateTodo(title, description, duedate, priority);
   project.todos.push(todo);
 }
 
-let defaultProject = Project('Default Project');
+// created a defual project to be displayed on screen
+let defaultProject = createProject('Default Project');
 addTodo(defaultProject, 'run', 'you have to run', '2024-21-2', 'important');
 
-let newTaskBtn = document.querySelector('.newtask');
-newTaskBtn.addEventListener('click', newTaskBtnEvents);
+// the new task btn is selected and an eventListener is added which generates a form
+document.querySelector('.new-todo').addEventListener('click', generateFrom);
 
-function newTaskBtnEvents() {
-  let submitBtn = document.querySelector('#submit-btn');
-  submitBtn.addEventListener('click', () => {
-    let newTodo = fetchFormData();
-    addTodo(defaultProject, newTodo.title, newTodo.description, newTodo.dueDate, newTodo.priority);
-    show();
-  });
+// form generator
+function generateFrom() {
+  let formContainer = document.getElementById('form-container');
+  formContainer.innerHTML = `
+<form action="" class="input-data-form">
+  <input type="text" name="" id="title" required placeholder="title">
+  <input type="text" name="" id="discription" required placeholder="discription">
+  <input type="date" name="" id="duedate" required placeholder="2001-20-02">
+  <input type="text" name="" id="priority" required placeholder="high">
+  <button type="submit">Submit</button>
+</form>`;
+  let form = document.querySelector('.input-data-form');
+  form.addEventListener('submit', handleForm);
 }
 
+// this funtion handles form submission
+function handleForm(event) {
+  event.preventDefault();
+  let newTodo = fetchFormData();
+  if (newTodo.title && newTodo.description && newTodo.dueDate && newTodo.priority) {
+    addTodo(defaultProject,
+      newTodo.title,
+      newTodo.description,
+      newTodo.dueDate,
+      newTodo.priority);
+  }
+  let formContainer = document.getElementById('form-container');
+  formContainer.innerHTML = '';
+  displayTodos(defaultProject, 'todosContainer');
+
+  show();
+}
+
+// call for a method that sets the name of the project
+setProjectName(defaultProject, '.project-name');
+// call for displaying all todos
+displayTodos(defaultProject, 'todosContainer');
+
+// it fetches data from form
+function fetchFormData() {
+  let title = document.getElementById('title').value;
+  let description = document.getElementById('discription').value;
+  let dueDate = document.getElementById('duedate').value;
+  let priority = document.getElementById('priority').value;
+  return {
+    title,
+    description,
+    dueDate,
+    priority
+  };
+}
+
+// sets project name
+function setProjectName(project, projectClass) {
+  let projectName = document.querySelector(projectClass);
+  projectName.textContent = project.name;
+}
+// fun of displaying all todos
+function displayTodos(project, todosContainerId) {
+  let todosContainer = document.getElementById(todosContainerId);
+  todosContainer.innerHTML = '';
+  todosContainer.innerHTML += `<h2>${project.name}</h2>`;
+  let todos = project.todos;
+  todos.forEach(todo => {
+    todosContainer.innerHTML += `
+    <div class="todo-item"><h2>${todo.title}</h2>
+    <p>${todo.description}</p>
+    <p>${todo.dueDate}</p>
+    <strong>${todo.priority}</strong>
+    <button class = "delete-btn" >Delete</button>
+    </div>
+    `;
+  });
+}
 
 function show() {
   console.log(defaultProject.todos);
 }
 
-function fetchFormData() {
-  let title = document.querySelector('.inputdata-form #title').value;
-  let description = document.querySelector('.inputdata-form #description').value;
-  let dueDate = document.querySelector('.inputdata-form #duedate').value;
-  let priority = document.querySelector('.inputdata-form #priority').value;
-  if (title && description && dueDate && priority) {
-    return { title, description, dueDate, priority };
-  }
+
+document.querySelector('.new-project').addEventListener('click', generateProjectForm);
+document.querySelector('.new-project').addEventListener('click', generateNewProjectContainer);
+
+function generateProjectForm() {
+  let formContainer = document.querySelector('.project-form-container');
+  formContainer.innerHTML = `
+  <form class="project-form">
+  <input type="text" required placeHolder="project name" id="project-name">
+  <button type="submit">Submit</button>
+  </form>
+  `;
+  let form = document.querySelector('.project-form');
+  form.addEventListener('submit', handleProjectForm);
 }
 
-/*
+function generateNewProjectContainer() {
+  document.querySelector('.new-project').setAttribute('disabled', true);
+  let projectsContainer = document.querySelector('.projects-container');
+  let newProjectContainer = document.createElement('div');
+  newProjectContainer.classList.add('project');
 
-function displayTodos(project,container) {
-  let projectContainer = document.querySelector(container);
-  projectContainer.innerHTML = '';
+  let newTaskBtn = document.createElement('button');
+  newTaskBtn.classList.add('new-todo');
+  newTaskBtn.textContent = 'New Task';
 
-  let todoItem = document.createElement('div');
-  todoItem.innerHTML = ` <h2>${project.name}</h2>
-    <button class="new-todo">New Task</button>`;
-
-  project.todos.forEach(todo => {
-    todoItem.innerHTML += `
-    <div class="todo-card">
-      <h3 class="title">${todo.title}</h3>
-      <p class="description">${todo.description}</p>
-      <p class="duedate">${todo.dueDate}</p>
-      <strong>${todo.priority}</strong>
-      <button class="delete-btn">Delete</button>
-    </div>`;
-    projectContainer.appendChild(todoItem);
-  });
-}
-
-displayTodos(defaultProject,'.todos-container');
-
-let addNewTodo = document.querySelector('.new-todo');
-addNewTodo.addEventListener('click',() => {
-  createForm();
-  sub();
-  removeForm();
-});
-
-
-
-
-function removeForm() {
-  let body = document.querySelector('body');
-  let form = document.querySelector('.inputdata-form');
-  let submitBtn = document.getElementById('submit-btn');
-  submitBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    body.removeChild(form);
-  });
-}
-
-function sub(){
-  let submitBtn = document.getElementById('submit-btn');
-  submitBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    addTodo();
-    displayTodos(defaultProject,'.todos-container');
-    removeForm();
-  });
-}
-
-function addTodo() {
-  
-}
-
-
-let newProject = document.querySelector('.new-project');
-newProject.addEventListener('click', () => {
-  let newProject = Project('new');
-  let projectsContainer = document.querySelector('.projects');
-
-  let project = document.createElement('div');
   let projectName = document.createElement('h2');
-  let addNewTodo = document.createElement('button');
-  addNewTodo.classList.add('new-todo');
-  addNewTodo.textContent = 'New Task';
-  projectName.textContent = newProject.name;
-  project.appendChild(projectName);
-  project.appendChild(addNewTodo)
-  projectsContainer.appendChild(project);
-});
+  projectName.classList.add('project-name');
 
-*/
+  newProjectContainer.appendChild(newTaskBtn);
+  newProjectContainer.appendChild(projectName);
+  projectsContainer.appendChild(newProjectContainer);
+
+
+}
+
+function handleProjectForm(event) {
+  event.preventDefault();
+  let name = document.getElementById('project-name').value;
+  let newProject = createProject(name);
+  let projectName = document.querySelector('.project-name');
+  projectName.textContent = newProject.name;
+  let formContainer = document.querySelector('.project-form-container');
+  formContainer.innerHTML = '';
+
+  document.querySelector('')
+}
