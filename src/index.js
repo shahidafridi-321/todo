@@ -141,14 +141,16 @@ function generateProjectForm() {
   });
 }
 
-
+// stores new projects names
 let allNewProjects = [];
 
+// gets values from generated form and puhes it to the projectNames array
 function fetchesProjectName(projectId) {
   let projectName = document.getElementById(projectId).value;
   allNewProjects.push(projectName);
 }
 
+// creates new project for all the names in projectNames array
 function createNewProject() {
   let projectContainer = document.querySelector('.projects');
   projectContainer.innerHTML = '';
@@ -163,35 +165,3 @@ function createNewProject() {
   });
 }
 
-
-/*
-function generateNewProjectContainer() {
-  document.querySelector('.new-project').setAttribute('disabled', true);
-  let projectsContainer = document.querySelector('.projects-container');
-  let newProjectContainer = document.createElement('div');
-  newProjectContainer.classList.add('project');
-
-  let newTaskBtn = document.createElement('button');
-  newTaskBtn.classList.add('new-todo');
-  newTaskBtn.textContent = 'New Task';
-
-  let projectName = document.createElement('h2');
-  projectName.classList.add('project-name');
-
-  newProjectContainer.appendChild(newTaskBtn);
-  newProjectContainer.appendChild(projectName);
-  projectsContainer.appendChild(newProjectContainer);
-
-
-}
-
-function handleProjectForm(event) {
-  event.preventDefault();
-  let name = document.getElementById('project-name').value;
-  let newProject = createProject(name);
-  let projectName = document.querySelector('.project-name');
-  projectName.textContent = newProject.name;
-  let formContainer = document.querySelector('.project-form-container');
-  formContainer.innerHTML = '';
-}
-*/
