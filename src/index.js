@@ -27,7 +27,7 @@ function addTodo(project, title, description, duedate, priority) {
 
 // created a defual project to be displayed on screen
 let defaultProject = createProject('Default Project');
-addTodo(defaultProject, 'run', 'you have to run', '2024-21-2', 'important');
+addTodo(defaultProject, 'run', 'you have to run', '2024-21-2', 'Low');
 
 // the new task btn is selected and an eventListener is added which generates a form
 document.querySelector('.new-todo').addEventListener('click', generateFrom);
@@ -39,12 +39,26 @@ function generateFrom() {
 <form action="" class="input-data-form">
   <input type="text" name="" id="title" required placeholder="title">
   <input type="text" name="" id="discription" required placeholder="discription">
-  <input type="date" name="" id="duedate" required placeholder="2001-20-02">
-  <input type="text" name="" id="priority" required placeholder="high">
+  <div class="date-container">
+  <label for = "duedate">DueDate</label>
+  <input type="date" name="" id="duedate" required >
+  </div>
+  <div class="priority-container">
+  <label for = "priority">Priority</label>
+  <select name="" id="priority">
+    <option value="low">Low</option>
+    <option value="medium">Medium</option>
+    <option value="high" selected>High</option>
+  </select>
+  </div>
   <button type="submit">Submit</button>
 </form>`;
   let form = document.querySelector('.input-data-form');
   form.addEventListener('submit', handleForm);
+  form.addEventListener('submit', () => {
+    displayTodos(defaultProject, 'todosContainer');
+
+  });
 }
 
 // this funtion handles form submission
@@ -60,7 +74,6 @@ function handleForm(event) {
   }
   let formContainer = document.getElementById('form-container');
   formContainer.innerHTML = '';
-  displayTodos(defaultProject, 'todosContainer');
 
   show();
 }
@@ -107,14 +120,10 @@ function displayTodos(project, todosContainerId) {
   });
 }
 
-function show() {
-  console.log(defaultProject.todos);
-}
-
 
 document.querySelector('.new-project').addEventListener('click', generateProjectForm);
-document.querySelector('.new-project').addEventListener('click', generateNewProjectContainer);
 
+// generates a form that asks for project name
 function generateProjectForm() {
   let formContainer = document.querySelector('.project-form-container');
   formContainer.innerHTML = `
@@ -124,9 +133,38 @@ function generateProjectForm() {
   </form>
   `;
   let form = document.querySelector('.project-form');
-  form.addEventListener('submit', handleProjectForm);
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    fetchesProjectName('project-name');
+    formContainer.innerHTML = '';
+    createNewProject();
+  });
 }
 
+
+let allNewProjects = [];
+
+function fetchesProjectName(projectId) {
+  let projectName = document.getElementById(projectId).value;
+  allNewProjects.push(projectName);
+}
+
+function createNewProject() {
+  let projectContainer = document.querySelector('.projects');
+  projectContainer.innerHTML = '';
+  allNewProjects.forEach(project => {
+    let div = document.createElement('div');
+    div.classList.add('project');
+    let name = document.createElement('h2');
+    name.classList.add('project-name');
+    name.textContent = project;
+    div.appendChild(name);
+    projectContainer.appendChild(div);
+  });
+}
+
+
+/*
 function generateNewProjectContainer() {
   document.querySelector('.new-project').setAttribute('disabled', true);
   let projectsContainer = document.querySelector('.projects-container');
@@ -155,6 +193,5 @@ function handleProjectForm(event) {
   projectName.textContent = newProject.name;
   let formContainer = document.querySelector('.project-form-container');
   formContainer.innerHTML = '';
-
-  document.querySelector('')
 }
+*/
