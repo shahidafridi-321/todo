@@ -1,3 +1,134 @@
+:root{
+  --padding-top-bottom:50px;
+  --paading-left-right:80px;
+}
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo-title-container{
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.nav-bar {
+  margin-right: 100px;
+  display: flex;
+  gap: 30px;
+}
+.main-content {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-areas: "projects todos";
+  gap: 10px;
+}
+.todos-container{
+  padding: 10px;
+  border: 2px solid blue;
+  grid-area: todos;
+  display: grid;
+  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+}
+.todo-manager {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items:start;
+  justify-content: flex-start;
+}
+.form-container{
+  padding: 10px;
+  border: 2px solid rgb(255, 0, 221);
+  grid-area: form-container;
+}
+#todosContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.todo-item {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  gap: 10px;
+  box-shadow: 0 0 10px rgb(63, 62, 62);
+  border-radius: 10px;
+}
+.task-header {
+  display: flex;
+  gap: 5px;
+  justify-content: space-between;
+  align-items: center;
+}
+.task-details{
+  display: flex;
+
+
+}
+
+.projects-container {
+  padding: 10px;
+  border: 2px solid rgb(43, 43, 49);
+  grid-area: projects;
+}
+
+.project-form-container{
+  padding: 10px;
+  border: 2px solid rgb(255, 153, 0);
+}
+
+button {
+  border: 1px solid #976d6d;
+  padding: 10px 30px;
+  font-weight: bold;
+  background: none;
+  font-size: inherit;
+  cursor: pointer;
+  transition: all 0.6s;
+
+}
+button:active {
+  background: #000;
+  color: #fff;
+  transition: all 0.6s;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .input-data-form {
   display: flex;

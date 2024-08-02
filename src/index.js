@@ -1,7 +1,7 @@
 import './style.css';
 
 // This factory creates a todo object
-function CreateTodo(title, description, dueDate, priority) {
+function createTodo(title, description, dueDate, priority) {
   return {
     title,
     description,
@@ -21,7 +21,7 @@ function createProject(name) {
 
 // it creates todo obj and pushes it in the provided project
 function addTodo(project, title, description, duedate, priority) {
-  let todo = CreateTodo(title, description, duedate, priority);
+  let todo = createTodo(title, description, duedate, priority);
   project.todos.push(todo);
 }
 
@@ -57,7 +57,6 @@ function generateFrom() {
   form.addEventListener('submit', handleForm);
   form.addEventListener('submit', () => {
     displayTodos(defaultProject, 'todosContainer');
-
   });
 }
 
@@ -74,8 +73,6 @@ function handleForm(event) {
   }
   let formContainer = document.getElementById('form-container');
   formContainer.innerHTML = '';
-
-  show();
 }
 
 // call for a method that sets the name of the project
@@ -110,14 +107,21 @@ function displayTodos(project, todosContainerId) {
   let todos = project.todos;
   todos.forEach(todo => {
     todosContainer.innerHTML += `
-    <div class="todo-item"><h2>${todo.title}</h2>
-    <p>${todo.description}</p>
-    <p>${todo.dueDate}</p>
-    <strong>${todo.priority}</strong>
-    <button class = "delete-btn" >Delete</button>
+    <div class="todo-item">
+    <div class="task-header">
+      <h2>${todo.title}</h2>
+      <p>${todo.dueDate}</p>
+      <strong>${todo.priority}</strong>
+      <button class = "delete-btn" >Delete</button>
+    </div>
+    <div class="task-details">
+      <p class="description">${todo.description}</p>
+    </div>
     </div>
     `;
   });
+
+  deleleTodo();
 }
 
 
@@ -165,3 +169,12 @@ function createNewProject() {
   });
 }
 
+function deleleTodo(){
+  let deleteBtns = document.querySelectorAll('.delete-btn');
+  deleteBtns.forEach((btn, index) => {
+    btn.addEventListener('click', () => {
+      defaultProject.todos.splice(index, 1);
+      displayTodos(defaultProject, 'todosContainer');
+    });
+  });
+}
