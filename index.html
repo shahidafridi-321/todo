@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<script defer src="runtime.bundle.js"></script><script defer src="main.bundle.js"></script></head>
+
+<body>
+  <header class="header-container">
+    <div class="logo-title-container">
+      <img src="/src/assets/images/todo.svg" alt="logo" class="logo">
+      <h1>TasKer</h1>
+    </div>
+    <nav class="nav-bar">
+      <button class="home-btn">Home</button>
+      <button class="about-btn">About</button>
+      <button class="contact-btn">Contact</button>
+    </nav>
+  </header>
+  <section class="introduction">
+    <div class="intro-content">
+      <h2>Welcome to TasKer</h2>
+      <p>TasKer is your ultimate task management tool designed to help you organize your projects and tasks efficiently. Whether you are managing personal errands or professional projects, TasKer provides a simple yet powerful interface to keep you on track.</p>
+      <p>Create new tasks, set due dates, and prioritize them according to your needs. You can also manage multiple projects simultaneously, ensuring that all your work is streamlined and accessible in one place.</p>
+      <p>Start now and take control of your tasks with TasKer!</p>
+    </div>
+  </section>
+  <main class="main-content">
+    <div class="todos-container">
+      <div class="todo-manager">
+        <button class="new-todo"><span title="Add new todo" class="add-todo-btn material-symbols-outlined">
+          add
+          </span></button>
+        <div id="todosContainer">
+          <h2 class="project-name"></h2>
+        </div>
+      </div>
+      <div id="form-container">
+      </div>
+    </div>
+    <div class="projects-container">
+      <button class="new-project">New Project</button>
+      <div class="projects">
+      </div>
+      <div class="project-form-container">
+      </div>
+    </div>
+  </main>
+  <footer class="footer">
+    <h3>All rights reserved</h3>
+  </footer>
+</body>
+
+</html>
