@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
     "start": "webpack serve --open --config webpack.config.js",
-    "watch": "webpack --watch"
-
+    "watch": "webpack --watch",
+    "deploy":"git add dist && git commit -m 'Initial dist subtree commit' && git subtree push --prefix dist origin gh-pages"
   },
   "keywords": [],
   "author": "",
