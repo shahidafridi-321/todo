@@ -15,8 +15,12 @@ module.exports = {
         test:/\.js$/,
       },
       {
-        test:/\.css$/i,
-        use:['style-loader','css-loader'],
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+      },
+      {
+        test:/\.(svg|jpg|png)$/i,
+        type: 'asset/resource',
       }
     ],
   },

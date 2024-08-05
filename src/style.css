@@ -8,12 +8,22 @@ body {
   padding: 0;
   font-size: 1rem;
   font-family: Arial, Helvetica, sans-serif;
+  height: 100vh;
+  display: grid;
+  background-color: #f0f0f0;
 }
 .header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 20px;
+  background-color: #2b312c;
+  color: #fff;
+  padding: 10px 50px;
+}
+.logo {
+  width: 70px;
+  aspect-ratio: 1/1;
 }
 .logo-title-container{
   display: flex;
@@ -25,20 +35,41 @@ body {
   display: flex;
   gap: 30px;
 }
+.introduction {
+  width: 100%;
+  background: rgb(223, 223, 235);
+  display: flex;
+  justify-content: center;
+  padding: 80px 20px;
+}
+
+.intro-content{
+  max-width: 570px;
+  text-align: center;
+}
+.intro-content h2 {
+  color: #2b312c;
+  margin-bottom: 20px;
+  font-variant: small-caps;
+}
+.intro-content p {
+  line-height: 1.5rem;
+  word-break: normal;
+  word-spacing: 4px;
+}
+
 .main-content {
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  grid-template-areas: "projects todos";
+  display: flex;
   gap: 10px;
+  max-width: 1440px;
+  justify-self: center;
+  padding: 50px 10px;
 }
 .todos-container{
   padding: 10px;
-  border: 2px solid blue;
-  grid-area: todos;
-  display: grid;
+  display: flex;
   gap: 20px;
-  display: grid;
-  grid-template-columns: repeat(2,1fr);
+  align-items: center;
 }
 .todo-manager {
   display: flex;
@@ -49,20 +80,23 @@ body {
 }
 .form-container{
   padding: 10px;
-  border: 2px solid rgb(255, 0, 221);
   grid-area: form-container;
 }
 #todosContainer {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  background: #fff;
+  box-shadow: 0 0 10px #3d3d3d;
+  padding: 20px;
+  border-radius: 20px;
 }
 .todo-item {
   display: flex;
   flex-direction: column;
   padding: 10px;
   gap: 10px;
-  box-shadow: 0 0 10px rgb(63, 62, 62);
+  box-shadow: 0 0 5px #3d3d3d;
   border-radius: 10px;
   align-items: start;
   max-width: 400px;
@@ -74,11 +108,37 @@ body {
   justify-content: space-between;
   align-items: center;
 }
-.delete-btn {
-  padding: 5px 10px;
+.new-todo {
+  background: none;
   border: none;
-  background: rgb(180, 194, 194);
-  border-radius: 5px;
+}
+
+
+.delete-btn {
+  border: none;
+  background: none;
+}
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24;
+  color: red;
+  font-size: 1.3rem;
+  width: 100%;
+  height: 100%;
+  background: none;
+}
+
+.add-todo-btn  {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24;
+  font-size: 4rem;
+  color: blue;
 }
 .task-details{
   display: flex;
@@ -87,17 +147,18 @@ body {
 }
 
 .projects-container {
+  order: -1;
   padding: 10px;
-  border: 2px solid rgb(43, 43, 49);
-  grid-area: projects;
+  border: 1px solid #000;
 }
 
 .project-form-container{
   padding: 10px;
-  border: 2px solid rgb(255, 153, 0);
 }
-
-button {
+.project h2 {
+  margin: 10px;
+}
+.home-btn,.contact-btn,.about-btn,.new-project{
   border: 1px solid #976d6d;
   padding: 10px 30px;
   font-weight: bold;
@@ -105,7 +166,11 @@ button {
   font-size: inherit;
   cursor: pointer;
   transition: all 0.6s;
+  color: #fff;
 
+}
+.new-project{
+  color: rgba(0,0,0,0.5);
 }
 button:active {
   background: #000;
@@ -113,41 +178,15 @@ button:active {
   transition: all 0.6s;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .input-data-form {
   display: flex;
   flex-direction: column;
   align-items:flex-start;
   border: 2px solid #976d6d;
-  width: 300px;
-  padding: 20px;
+  width: auto;
+  padding-right: 30px;
   gap: 20px;
+
 }
 
 .todo-item {
@@ -158,4 +197,54 @@ button:active {
 p,h2,input,strong,h3{
   margin: 0;
   padding: 0;
+}
+
+.input-data-form, .project-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: white;
+  padding: 20px;
+  padding-right: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.input-data-form input, .input-data-form textarea, .input-data-form select,
+.project-form input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.input-data-form input:focus, .input-data-form textarea:focus, .input-data-form select:focus,
+.project-form input:focus {
+  outline: none;
+  border-color: #4CAF50;
+}
+.input-data-form button, .project-form button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.input-data-form button:hover, .project-form button:hover {
+  background-color: #45a049;
+}
+
+.input-data-form textarea {
+  resize: none;
+}
+
+.footer{
+  background-color: #2b312c;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
