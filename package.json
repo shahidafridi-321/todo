@@ -8,6 +8,7 @@
     "build": "webpack",
     "start": "webpack serve --open --config webpack.config.js",
     "watch": "webpack --watch"
+
   },
   "keywords": [],
   "author": "",
